@@ -1,0 +1,68 @@
+.navbar {
+    position: relative;
+    z-index: 2;
+}
+
+.sidenav {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f8f9fa;
+    padding-top: 60px;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: left 0.5s;
+    margin-top: -7px;
+}
+
+.sidenav.show {
+    left: 0;
+    margin-left: 0;
+}
+
+
+.sidenav .accordion {
+    margin: 0;
+    padding: 0;
+}
+
+.sidenav .accordion-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+
+.sidenav .accordion-button {
+    background-color: #343a40;
+    color: white;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 16px;
+    border: none;
+    border-radius: 0;
+    width: 100%;
+}
+
+.sidenav .accordion-button:hover {
+    background-color: #e9ecef;
+}
+
+.sidenav .accordion-body {
+    padding: 0;
+}
+
+.sidenav .btn {
+    width: 100%;
+    border-radius: 0;
+}
+
+.sidenav .accordion-button .fa {
+    margin-right: 8px;
+}
+
+.container-sidenav {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+}

@@ -1,0 +1,49 @@
+<div class="container mt-5" *ngIf="comic; else loading">
+  <h1 class="text-center">{{ comic.title }}</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <img 
+          [src]="comic.thumbnail?.path + '.' + comic.thumbnail?.extension" 
+          class="card-img-top" 
+          alt="{{ comic.title }}" 
+          style="max-width: 100%; max-height: 500px; height: auto; object-fit: contain;"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ comic.title }}</h5>
+
+          <p class="card-text" *ngIf="comic.description">
+            {{ comic.description }}
+          </p>
+          <p class="card-text text-muted" *ngIf="!comic.description">
+            No description available.
+          </p>
+
+          <div class="card-text">
+            <p><strong>Issue Number:</strong> {{ comic.issueNumber || 'N/A' }}</p>
+            <p><strong>Page Count:</strong> {{ comic.pageCount || 'N/A' }}</p>
+            <p><strong>Format:</strong> {{ comic.format || 'N/A' }}</p>
+            <p><strong>On Sale Date:</strong> {{ comic.dates[0]?.date ? (comic.dates[0]?.date | date: 'longDate') : 'N/A' }}</p>
+            <p><strong>ISBN:</strong> {{ comic.isbn || 'N/A' }}</p>
+            <p><strong>UPC:</strong> {{ comic.upc || 'N/A' }}</p>
+
+            <p *ngIf="comic.prices && comic.prices.length > 0">
+              <strong>Price:</strong> {{ comic.prices[0].price ? '$' + comic.prices[0].price : 'N/A' }}
+            </p>
+          </div>
+
+          <br>
+          <a [routerLink]="['/comics']" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-left"></i> Atras
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="text-center">
+    <p>Loading comic details...</p>
+  </div>
+</ng-template>

@@ -1,0 +1,55 @@
+<style>
+    .bg {
+        background-image: url(login/tecnofactory.png);
+        background-position: center center;
+    }
+</style>
+<br>
+<div class="container w-75 mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+        <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded"></div>
+        <div class="col p-5 rounded-end">
+            <div class="text-end">
+                <img src="login/tecnofactory.png" width="48" alt="">
+            </div>
+            <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+            <form action="#" autocomplete="off">
+                <div class="mb-4">
+                    <label for="email" class="form-label">Usuario</label>
+                    <input type="email" class="form-control" name="email" [formControl]="correo"
+                        [ngClass]="{ 'is-invalid': correo.invalid && (correo.dirty || correo.touched), 'is-valid': correo.valid && (correo.dirty || correo.touched) }"
+                        
+                        >
+                    <div class="invalid-feedback" *ngIf="correo.errors && (correo.dirty || correo.touched)">
+                        <div *ngIf="correo.errors['required']">Este campo es requerido.</div>
+                        <div *ngIf="correo.errors['email']">Debe ser un correo electronico valido.</div>
+                        <div *ngIf="correo.errors['minlength']">Al menos 10 caracteres.</div>
+                        <div *ngIf="correo.errors['maxlength']">Máximo 50 caracteres.</div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="password" [formControl]="contrasena"
+                        [ngClass]="{ 'is-invalid': contrasena.invalid && (contrasena.dirty || contrasena.touched), 'is-valid': contrasena.valid && (contrasena.dirty || contrasena.touched) }">
+                    <div class="invalid-feedback" *ngIf="contrasena.errors && (contrasena.dirty || contrasena.touched)">
+                        <div *ngIf="contrasena.errors['required']">Este campo es requerido.</div>
+                        <div *ngIf="contrasena.errors['minlength']">Al menos 6 caracteres.</div>
+                        <div *ngIf="contrasena.errors['maxlength']">Máximo 30 caracteres.</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 form-check">
+                    <input type="checkbox" name="connected" class="form-check-input">
+                    <label for="connected" class="form-check-label">Mantener conectado</label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" (click)="login($event)" class="btn btn-dark"
+                        [disabled]="!correo.valid || !contrasena.valid">Iniciar sesión</button>
+                </div>
+                <div class="my-3">
+                    <span>¿Aun no tienes cuenta? <a href="./register">Registrate</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

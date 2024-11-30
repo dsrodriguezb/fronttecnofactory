@@ -1,0 +1,184 @@
+<div class="container">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="container rounded shadow mt-3 p-4">
+            <br>
+            <div class="d-flex justify-content-between p-4">
+                <h4>Registrar usuario</h4>
+                <a href="#" routerLink="/login" class="btn btn-dark">Atras</a>
+            </div>
+            <div class="form-row">
+                <form class="p-4 form" [formGroup]="form" (ngSubmit)="submit()">
+                    <div class="form-group mb-2">
+                        <label class="form-check-label text-muted">
+                            Los datos marcados con un asterisco
+                            <strong class="text-danger">(*)</strong> son requeridos
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 mb-3">
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo:</label>
+                                <small class="text-danger" title="requerido"> (*)</small>
+                                <input id="nombre" type="text" class="form-control" formControlName="nombre"
+                                    autocomplete="off" [ngClass]="{
+                        'is-valid':
+                        nombre?.enabled &&
+                        (nombre?.touched || nombre?.dirty) &&
+                        nombre?.valid,
+                        'is-invalid':
+                        nombre?.enabled &&
+                        (nombre?.touched || nombre?.dirty) &&
+                        !nombre?.valid
+                    }">
+                            </div>
+                            <div class="text-danger" *ngIf="(nombre?.dirty || nombre?.touched) && !nombre?.valid">
+                                <div *ngIf="nombre?.hasError('required')">El campo es requerido.</div>
+                                <div *ngIf="nombre?.hasError('pattern')">Solo se aceptan letras y espacios.</div>
+                                <div *ngIf="nombre?.hasError('minlength')">Mínimo 15 caracteres.</div>
+                                <div *ngIf="nombre?.hasError('maxlength')">Maximo 100 caracteres.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-3">
+                            <div class="form-group">
+                                <label for="correo">Correo electronico:</label>
+                                <small class="text-danger" title="requerido"> (*)</small>
+                                <input id="correo" type="email" class="form-control" formControlName="correo"
+                                    autocomplete="off" [ngClass]="{
+                        'is-valid':
+                        correo?.enabled &&
+                        (correo?.touched || correo?.dirty) &&
+                        correo?.valid,
+                        'is-invalid':
+                        correo?.enabled &&
+                        (correo?.touched || correo?.dirty) &&
+                        !correo?.valid
+                    }">
+                            </div>
+                            <div class="text-danger" *ngIf="(correo?.dirty || correo?.touched) && !correo?.valid">
+                                <div *ngIf="correo?.hasError('required')">El campo es requerido.</div>
+                                <div *ngIf="correo?.hasError('email')">Formato correo. (test&#64;example.com)</div>
+                                <div *ngIf="correo?.hasError('minlength')">Minimo 8 caracteres.</div>
+                                <div *ngIf="correo?.hasError('maxlength')">Máximo 50 caracteres.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-3">
+                            <div class="form-group">
+                                <label for="telefono">Telefono:</label>
+                                <small class="text-danger" title="requerido"> (*)</small>
+                                <input id="telefono" type="email" class="form-control" formControlName="telefono"
+                                    autocomplete="off" [ngClass]="{
+                        'is-valid':
+                        telefono?.enabled &&
+                        (telefono?.touched || telefono?.dirty) &&
+                        telefono?.valid,
+                        'is-invalid':
+                        telefono?.enabled &&
+                        (telefono?.touched || telefono?.dirty) &&
+                        !telefono?.valid
+                    }">
+                            </div>
+                            <div class="text-danger" *ngIf="(telefono?.dirty || telefono?.touched) && !telefono?.valid">
+                                <div *ngIf="telefono?.hasError('required')">El campo es requerido.</div>
+                                <div *ngIf="telefono?.hasError('pattern')">Solo se aceptan 10 números</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-3">
+                            <div class="form-group">
+                                <label for="login">Login:</label>
+                                <small class="text-danger" title="requerido"> (*)</small>
+                                <input id="login" type="text" class="form-control" formControlName="login"
+                                    autocomplete="off" [ngClass]="{
+                        'is-valid':
+                        login?.enabled &&
+                        (login?.touched || login?.dirty) &&
+                        login?.valid,
+                        'is-invalid':
+                        login?.enabled &&
+                        (login?.touched || login?.dirty) &&
+                        !login?.valid
+                    }">
+                            </div>
+                            <div class="text-danger" *ngIf="(login?.dirty || login?.touched) && !login?.valid">
+                                <div *ngIf="login?.hasError('required')">El campo es requerido.</div>
+                                <div *ngIf="login?.hasError('pattern')">Solo se acepta letras y numeros.</div>
+                                <div *ngIf="login?.hasError('minlength')">Minimo 6 digitos.</div>
+                                <div *ngIf="login?.hasError('maxlength')">Maximo 20 digitos.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-3">
+                            <div class="form-group">
+                                <label for="password">Contraseña:</label>
+                                <small class="text-danger" title="requerido"> (*)</small>
+                                <div class="input-group">
+                                    <input id="password" type="password" class="form-control" formControlName="password"
+                                        [ngClass]="{
+                        'is-valid':
+                        password?.enabled &&
+                        (password?.touched || password?.dirty) &&
+                        password?.valid,
+                        'is-invalid':
+                        password?.enabled &&
+                        (password?.touched || password?.dirty) &&
+                        !password?.valid
+                    }">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            (click)="togglePasswordVisibility('password')">
+                                            <i class="fa" [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-danger" *ngIf="(password?.dirty || password?.touched) && !password?.valid">
+                                <div *ngIf="password?.hasError('required')">El campo es requerido.</div>
+                                <div *ngIf="password?.hasError('pattern')">La contraseña debe contener al menos una letra, un número y un carácter especial permitido</div>
+                                <div *ngIf="password?.hasError('minlength')">Minimo 6 digitos.</div>
+                                <div *ngIf="password?.hasError('maxlength')">Maximo 20 digitos.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-3">
+                            <div class="form-group">
+                                <label for="password_confirmation">Confirmar contraseña:</label>
+                                <small class="text-danger" title="requerido"> (*)</small>
+                                <div class="input-group">
+                                    <input id="password_confirmation" type="password" class="form-control"
+                                        formControlName="password_confirmation" [ngClass]="{
+                            'is-valid':
+                            password_confirmation?.enabled &&
+                            (password_confirmation?.touched || password_confirmation?.dirty) &&
+                            password_confirmation?.valid,
+                            'is-invalid':
+                            password_confirmation?.enabled &&
+                            (password_confirmation?.touched || password_confirmation?.dirty) &&
+                            !password_confirmation?.valid
+                        }">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            (click)="togglePasswordCVisibility('password_confirmation')">
+                                            <i class="fa"
+                                                [ngClass]="passwordConfirmationVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="(password_confirmation?.dirty || password_confirmation?.touched) && !password_confirmation?.valid">
+                                <div *ngIf="password_confirmation?.hasError('required')">El campo es requerido.</div>
+                                <div *ngIf="password_confirmation?.hasError('pattern')">La contraseña debe contener al menos una letra, un número y un carácter especial permitido.</div>
+                                <div *ngIf="password_confirmation?.hasError('minlength')">Minimo 6 digitos.</div>
+                                <div *ngIf="password_confirmation?.hasError('maxlength')">Maximo 20 digitos.</div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-dark" type="submit" [disabled]="!form.valid">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
