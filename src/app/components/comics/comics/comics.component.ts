@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ModalService } from '../../../_shared/_services/modal.service';
+import { ToastService } from '../../../_shared/_services/toast.service';
 
 @Component({
   selector: 'app-comics',
@@ -21,7 +22,7 @@ export class ComicsComponent {
   ngOnInit() {
     this.getComics();
   }
-  constructor(private comicService:ComicsService, public route:ActivatedRoute, private _notificacionesService: ModalService) { }
+  constructor(private comicService:ComicsService, public route:ActivatedRoute, private _notificacionesService: ModalService, private toastService: ToastService) { }
 
 
   getComics(){
@@ -41,7 +42,12 @@ export class ComicsComponent {
           this.comicService.toggleFavorite(comic.id, userId).subscribe(
             (response) => {
               let message = response;
-              this._notificacionesService.mostrarNotificacion('SUCCESS', `Alerta`, message);
+              if(message === 'Removed from favorites'){
+                this.toastService.show('error', 'Éxito', 'Eliminado de favoritos', 3000);
+              }else{
+                this.toastService.show('success', 'Éxito', 'Agregado a favoritos', 3000);
+              }
+              
             },
             (error) => {
               console.error('Error toggling favorite:', error);

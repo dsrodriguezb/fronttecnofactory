@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 import { NotificacionesModalComponent } from './components/notificaciones-modal/notificaciones-modal.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 
 @NgModule({
   declarations: [
     ConfirmacionComponent,
-    NotificacionesModalComponent
+    NotificacionesModalComponent,
+    ToastComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { NotificacionesModalComponent } from './components/notificaciones-modal/
   ],
   exports: [
     ConfirmacionComponent,
-    NotificacionesModalComponent
+    NotificacionesModalComponent,
+    ToastComponent
   ]
 })
 export class SharedModule { }
