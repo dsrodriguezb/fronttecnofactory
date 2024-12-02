@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ModalService } from '../../../_shared/_services/modal.service';
 
 @Component({
   selector: 'app-comics',
@@ -20,7 +21,7 @@ export class ComicsComponent {
   ngOnInit() {
     this.getComics();
   }
-  constructor(private comicService:ComicsService, public route:ActivatedRoute) { }
+  constructor(private comicService:ComicsService, public route:ActivatedRoute, private _notificacionesService: ModalService) { }
 
 
   getComics(){
@@ -28,15 +29,31 @@ export class ComicsComponent {
   }
 
   markAsFavorite(comic: any) {
-    const userId = this.decodedToken.sub;
-    this.comicService.toggleFavorite(comic.id, userId).subscribe(
-      (response) => {
-        console.log(response.message);
-      },
-      (error) => {
-        console.error('Error toggling favorite:', error);
-      }
-    );
+
+    this._notificacionesService
+      .mostrarNotificacionConfirmacion(
+        'INFO',
+        'Guardar información',
+        '¿Está seguro que realizar esta accion ?'
+      ).subscribe((reason: string) => {
+        if (reason === 'OK') {
+          const userId = this.decodedToken.sub;
+          this.comicService.toggleFavorite(comic.id, userId).subscribe(
+            (response) => {
+              let message = response;
+              this._notificacionesService.mostrarNotificacion('SUCCESS', `Alerta`, message);
+            },
+            (error) => {
+              console.error('Error toggling favorite:', error);
+            }
+          );
+        }else{
+          this._notificacionesService.mostrarNotificacion('SUCCESS', `Alerta`, `Accion cancelada`);
+        }
+        
+      });
+
+    
   }
 
   isFavorite(comic: any): boolean {

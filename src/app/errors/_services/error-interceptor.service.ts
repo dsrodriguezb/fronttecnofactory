@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, EMPTY, Observable, retry, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
+import { ModalService } from '../../_shared/_services/modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { environment } from '../../../environments/environment.development';
 export class ErrorInterceptorService implements HttpInterceptor {
 
   private router = inject(Router);
+  private _notificacionesService = inject(ModalService);
 
 
   constructor() { }
@@ -21,13 +23,14 @@ export class ErrorInterceptorService implements HttpInterceptor {
         }
       }
     })).pipe(catchError((err) => {
+      console.log("Entre aca: jeje");
       if (err.status == 0) {
         this.router.navigate(['/maitenance']);
       } else if (err.error.status == 400) {
         if(err.error.error){
-          alert(err.error.error);
+          this._notificacionesService.mostrarNotificacion('ERROR', `Alerta`, err.error.error);
         }else{
-          alert(err.error.message);
+          this._notificacionesService.mostrarNotificacion('ERROR', `Alerta`, err.error.error);
         }
         
       } else if (err.error.status == 401) {

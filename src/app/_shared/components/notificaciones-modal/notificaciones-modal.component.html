@@ -1,0 +1,30 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">
+            <ng-template [ngIf]="tipo == 'INFO'">
+                <em class="fa fa-xs fa-info-circle text-info"></em>&nbsp;&nbsp;&nbsp;
+            </ng-template>
+            <ng-template [ngIf]="tipo == 'SUCCESS'">
+                <em class="fa fa-xs fa-check-circle text-success"></em>&nbsp;&nbsp;&nbsp;
+            </ng-template>
+            <ng-template [ngIf]="tipo == 'WARNING'">
+                <em class="fa fa-xs fa-exclamation-triangle text-warning"></em>&nbsp;&nbsp;&nbsp;
+            </ng-template>
+            <ng-template [ngIf]="tipo == 'ERROR'">
+                <em class="fa fa-xs fa-times-circle text-danger"></em>&nbsp;&nbsp;&nbsp;
+            </ng-template>
+            <ng-template [ngIf]="tipo == ''">
+                <em class="fa fa-xs fa-bell text-primary"></em>&nbsp;&nbsp;&nbsp;
+            </ng-template>{{titulo}}
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="bsModalRef.hide()"></button>
+    </div>
+    <div class="modal-body">
+        <span [innerHTML]="mensaje"></span>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">
+            {{ enIngles === true ? 'OK' : 'Aceptar'}}
+        </button>
+    </div>
+</div>
